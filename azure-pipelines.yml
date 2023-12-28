@@ -1,0 +1,31 @@
+trigger:
+- main
+
+resources:
+- repo: self
+
+variables:
+  dockerRegistryServiceConnection: 'b0cf3d2f-716a-46f6-ad18-f38a066e9863'
+  imageRepository: 'urlscraper'
+  containerRegistry: 'shoppinghelper.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/ShoppingHelper/UrlScraper/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build and push stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
