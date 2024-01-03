@@ -49,10 +49,8 @@ stages:
     steps:
     - task: HelmDeploy@0
       inputs:
-        connectionType: 'Azure Resource Manager'
-        azureSubscription: 'Visual Studio Enterprise-abonnement – MPN (50fc8cf7-a304-429a-8a1c-a39bc2e915d1)'
-        azureResourceGroup: 'rg-shoppinghelper-prod'
-        kubernetesCluster: 'aks-shoppinghelper-prod'
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceConnection: 'aks-shoppinghelper-prod'
         command: 'install'
         chartType: 'Name'
         chartName: 'dabma/worker'
