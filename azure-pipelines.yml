@@ -29,8 +29,8 @@ stages:
         tags: |
           $(tag)
 
-- stage: Prod
-  displayName: Deploy Prod
+- stage: Helm
+  displayName: Add Helm Repo
   dependsOn: Build
   jobs:
   - job: Deploy
@@ -39,3 +39,21 @@ stages:
     - task: CmdLine@2
       inputs:
         script: 'echo helm repo add dabma https://helm.danielbjerre.net/'
+
+- stage: Prod
+  displayName: Deploy Prod
+  dependsOn: Build
+  jobs:
+  - job: Deploy
+    displayName: Deploy
+    steps:
+    - task: HelmDeploy@0
+      inputs:
+        connectionType: 'Azure Resource Manager'
+        azureSubscription: 'Visual Studio Enterprise-abonnement – MPN (50fc8cf7-a304-429a-8a1c-a39bc2e915d1)'
+        azureResourceGroup: 'rg-shoppinghelper-prod'
+        kubernetesCluster: 'aks-shoppinghelper-prod'
+        command: 'install'
+        chartType: 'Name'
+        chartName: 'dabma/worker'
+        releaseName: 'urlscraper'
