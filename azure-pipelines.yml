@@ -43,4 +43,3 @@ stages:
         chartType: 'Name'
         chartName: 'https://helm.danielbjerre.net/worker'
         releaseName: 'urlscraper'
-        updateDependency: true
