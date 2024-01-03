@@ -29,8 +29,8 @@ stages:
         tags: |
           $(tag)
 
-- stage: Helm
-  displayName: Add Helm Repo
+- stage: Prod
+  displayName: Deploy Prod
   dependsOn: Build
   jobs:
   - job: AddRepo
@@ -39,11 +39,6 @@ stages:
     - task: CmdLine@2
       inputs:
         script: 'echo helm repo add dabma https://helm.danielbjerre.net/'
-
-- stage: Prod
-  displayName: Deploy Prod
-  dependsOn: Helm
-  jobs:
   - job: Deploy
     displayName: Deploy
     steps:
