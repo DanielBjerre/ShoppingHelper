@@ -40,6 +40,4 @@ stages:
         connectionType: 'Kubernetes Service Connection'
         kubernetesServiceConnection: 'aks-shoppinghelper-prod'
         command: 'install'
-        chartType: 'Name'
-        chartName: 'https://helm.danielbjerre.net/helm-charts/worker'
-        releaseName: 'urlscraper'
+        arguments: '--repo https://helm.danielbjerre.net/ urlscraper dabma/worker'
