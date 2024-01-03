@@ -38,7 +38,6 @@ stages:
       inputs:
         command: 'package'
         chartPath: 'helm-charts/worker'
-        destination: '$(Pipeline.Workspace)'
         updateDependency: true
 - stage: Prod
   displayName: Deploy to Production
@@ -46,6 +45,13 @@ stages:
   - job: Deploy
     displayName: Deploy to Production
     steps:
+    - task: DownloadBuildArtifacts@1
+      inputs:
+        buildType: 'current'
+        downloadType: 'specific'
+        itemPattern: 'worker-0.1.0.tgz'
+        downloadPath: '$(System.DefaultWorkingDirectory)'
+        checkDownloadedFiles: true
     - task: HelmDeploy@0
       inputs:
         connectionType: 'Kubernetes Service Connection'
@@ -53,7 +59,7 @@ stages:
         namespace: 'scrapeservice'
         command: 'upgrade'
         chartType: 'FilePath'
-        chartPath: '$(Pipeline.Workspace)/worker-0.1.0.tgz'
+        chartPath: 'worker-0.1.0.tgz'
         releaseName: 'urlscraper'
         overrideValues: 'tag=$(tag)'
         valueFile: 'urlscraper/values.yml'
