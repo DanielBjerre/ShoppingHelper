@@ -34,18 +34,19 @@ stages:
   - job: Package
     displayName: Package Helm Chart
     steps:
-    - task: HelmDeploy@0
-      inputs:
-        command: 'package'
-        chartPath: 'helm-charts/worker'
-        destination: '$(System.DefaultWorkingDirectory)'
-        updateDependency: true
+
 - stage: Prod
   displayName: Deploy to Production
   jobs:
   - job: Deploy
     displayName: Deploy to Production
     steps:
+    - task: HelmDeploy@0
+      inputs:
+        command: 'package'
+        chartPath: 'helm-charts/worker'
+        destination: '$(System.DefaultWorkingDirectory)'
+        updateDependency: true
     - task: HelmDeploy@0
       inputs:
         connectionType: 'Kubernetes Service Connection'
