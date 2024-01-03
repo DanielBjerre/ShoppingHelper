@@ -52,6 +52,20 @@ stages:
         itemPattern: 'worker-0.1.0.tgz'
         downloadPath: '$(System.DefaultWorkingDirectory)'
         checkDownloadedFiles: true
+    - task: CmdLine@2
+      inputs:
+        script: |
+          echo "Structure of work folder of this pipeline:"
+          tree $(Agent.WorkFolder)/1
+
+          echo "Build.ArtifactStagingDirectory:" 
+          echo "$(Build.ArtifactStagingDirectory)"
+
+          echo "Build.BinariesDirectory:" 
+          echo "$(Build.BinariesDirectory)"
+
+          echo "Build.SourcesDirectory:"
+          echo "$(Build.SourcesDirectory)"
     - task: HelmDeploy@0
       inputs:
         connectionType: 'Kubernetes Service Connection'
