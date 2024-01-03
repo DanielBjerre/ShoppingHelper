@@ -28,23 +28,14 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-
-- stage: Prod
-  displayName: Deploy Prod
-  dependsOn: Build
+- stage: Helm
+  displayName: Package Helm Chart
   jobs:
-  - job: Deploy
-    displayName: Deploy
+  - job: Package
+    displayName: Package Helm Chart
     steps:
-    - task: CmdLine@2
-      displayName: Add Helm Repo
-      inputs:
-        script: 'echo helm repo add dabma https://helm.danielbjerre.net/'
     - task: HelmDeploy@0
       inputs:
-        connectionType: 'Kubernetes Service Connection'
-        kubernetesServiceConnection: 'aks-shoppinghelper-prod'
-        command: 'install'
-        chartType: 'Name'
-        chartName: 'dabma/worker'
-        releaseName: 'urlscraper'
+        command: 'package'
+        chartPath: 'ShoppingHelper/helm-charts/worker'
+        updateDependency: true
