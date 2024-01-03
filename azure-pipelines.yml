@@ -41,5 +41,5 @@ stages:
         kubernetesServiceConnection: 'aks-shoppinghelper-prod'
         command: 'install'
         chartType: 'Name'
-        chartName: 'https://helm.danielbjerre.net/worker'
+        chartName: 'https://helm.danielbjerre.net/helm-charts/worker'
         releaseName: 'urlscraper'
