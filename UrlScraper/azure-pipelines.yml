@@ -37,5 +37,5 @@ stages:
     - task: HelmDeploy@0
       inputs:
         command: 'package'
-        chartPath: 'ShoppingHelper/helm-charts/worker'
+        chartPath: 'helm-charts/worker'
         updateDependency: true
