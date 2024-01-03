@@ -37,7 +37,5 @@ stages:
     steps:
     - task: HelmDeploy@0
       inputs:
-        connectionType: 'Kubernetes Service Connection'
-        kubernetesServiceConnection: 'aks-shoppinghelper-prod'
-        command: 'install'
-        arguments: '--repo https://helm.danielbjerre.net/ urlscraper dabma/worker'
+        command: 'repo'
+        arguments: 'add dabma https://helm.danielbjerre.net/'
