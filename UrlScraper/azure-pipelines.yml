@@ -9,7 +9,7 @@ variables:
   dockerRegistryServiceConnection: 'b0cf3d2f-716a-46f6-ad18-f38a066e9863'
   imageRepository: 'urlscraper'
   containerRegistry: 'shoppinghelper.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/ShoppingHelper/Dockerfile'
+  dockerfilePath: 'Dockerfile'
   tag: '$(Build.BuildId)'
 
 stages:
