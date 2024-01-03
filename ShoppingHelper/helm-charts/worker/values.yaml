@@ -1,0 +1,18 @@
+# Default values for worker.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+environment: ""
+
+aks:
+  replicaCount: 1
+  namespace: ""
+
+image:
+  repository: ""
+  tag: ""
+
+entra:
+  clientId: ""
+  tenantId: ""
+  managedIdentityClientId: ""

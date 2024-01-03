@@ -1,0 +1,46 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Release.Name }}
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.aks.namespace }}
+spec: 
+  replicas: {{ .Values.aks.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      serviceAccountName: "{{ .Release.Name }}-sa"
+      containers:
+        - name: {{ .Release.Name }}
+          image: "{{ .Values.image.repository }}/{{ .Release.Name }}:{{ .Values.image.tag }}"
+          volumeMounts:
+          - name: secrets-store01-inline
+            mountPath: "/mnt/secrets-store"
+            readOnly: true
+          env:
+            - name: AZURE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Release.Name }}-secrets"
+                  key: AzureAd--ClientSecret
+            - name: AZURE_CLIENT_ID
+              value: {{ .Values.entra.clientId }}
+            - name: AZURE_TENANT_ID
+              value: {{ .Values.entra.tenantId }}
+            - name: DOTNET_ENVIRONMENT
+              value: {{ .Values.environment }}
+      volumes:
+        - name: secrets-store01-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "{{ .Release.Name }}-workload-identity"
+---
+{{- include "libchart.secretProviderClass" . }}
