@@ -38,7 +38,6 @@ stages:
       inputs:
         command: 'package'
         chartPath: 'helm-charts/worker'
-        destination: '$(System.DefaultWorkingDirectory)'
         updateDependency: true
 - stage: Prod
   displayName: Deploy to Production
