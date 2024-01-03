@@ -1,4 +1,5 @@
 trigger:
+
 - main
 
 resources:
@@ -8,7 +9,7 @@ variables:
   dockerRegistryServiceConnection: 'b0cf3d2f-716a-46f6-ad18-f38a066e9863'
   imageRepository: 'urlscraper'
   containerRegistry: 'shoppinghelper.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/ShoppingHelper/UrlScraper/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/ShoppingHelper/Dockerfile'
   tag: '$(Build.BuildId)'
 
 stages:
@@ -27,3 +28,23 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+
+- stage: Prod
+  displayName: Deploy Prod
+  dependsOn: Build
+  jobs:
+  - job: Deploy
+    displayName: Deploy
+    steps:
+    - task: CmdLine@2
+      displayName: Add Helm Repo
+      inputs:
+        script: 'echo helm repo add dabma https://helm.danielbjerre.net/'
+    - task: HelmDeploy@0
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceConnection: 'aks-shoppinghelper-prod'
+        command: 'install'
+        chartType: 'Name'
+        chartName: 'dabma/worker'
+        releaseName: 'urlscraper'
