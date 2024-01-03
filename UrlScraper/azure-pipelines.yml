@@ -50,7 +50,7 @@ stages:
       inputs:
         buildType: 'current'
         downloadType: 'specific'
-        itemPattern: 'worker-*.tgz'
+        itemPattern: 'worker-0.1.0.tgz'
         downloadPath: '$(System.DefaultWorkingDirectory)'
     - task: HelmDeploy@0
       inputs:
@@ -59,7 +59,7 @@ stages:
         namespace: 'scrapeservice'
         command: 'upgrade'
         chartType: 'FilePath'
-        chartPath: '**/worker-*.tgz'
+        chartPath: 'worker-0.1.0.tgz'
         releaseName: 'urlscraper'
         overrideValues: 'tag=$(tag)'
         valueFile: 'urlscraper/values.yml'
