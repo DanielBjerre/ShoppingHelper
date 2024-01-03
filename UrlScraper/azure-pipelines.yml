@@ -49,6 +49,7 @@ stages:
       inputs:
         connectionType: 'Kubernetes Service Connection'
         kubernetesServiceConnection: 'aks-shoppinghelper-prod'
+        namespace: 'scrapeservice'
         command: 'upgrade'
         chartType: 'FilePath'
         chartPath: '$(Build.ArtifactStagingDirectory)/worker-0.1.0.tgz'
