@@ -33,15 +33,13 @@ stages:
   displayName: Deploy Prod
   dependsOn: Build
   jobs:
-  - job: AddRepo
-    displayName: Add Helm Repo
-    steps:
-    - task: CmdLine@2
-      inputs:
-        script: 'echo helm repo add dabma https://helm.danielbjerre.net/'
   - job: Deploy
     displayName: Deploy
     steps:
+    - task: CmdLine@2
+      displayName: Add Helm Repo
+      inputs:
+        script: 'echo helm repo add dabma https://helm.danielbjerre.net/'
     - task: HelmDeploy@0
       inputs:
         connectionType: 'Kubernetes Service Connection'
