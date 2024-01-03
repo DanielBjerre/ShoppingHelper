@@ -1,4 +1,5 @@
 trigger:
+
 - main
 
 resources:
@@ -35,7 +36,6 @@ stages:
   - job: Deploy
     displayName: Deploy
     steps:
-    - task: HelmDeploy@0
+    - task: CmdLine@2
       inputs:
-        command: 'repo'
-        arguments: 'add dabma https://helm.danielbjerre.net/'
+        script: 'echo helm repo add dabma https://helm.danielbjerre.net/'
