@@ -9,7 +9,7 @@ spec:
     usePodIdentity: "false"
     useVMManagedIdentity: "false"          
     clientID: {{ .Values.entra.managedIdentityClientId }}
-    keyvaultName: {{ .Release.Name }}-kv
+    keyvaultName: {{ .Values.keyvaultName }}
     objects:  |
       array:
         - |

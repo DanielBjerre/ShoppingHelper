@@ -1,4 +1,5 @@
 ﻿environment: "Production"
+keyvaultName: "kv-urlscraper-prod"
 
 aks:
   replicaCount: 1
