@@ -45,6 +45,11 @@ stages:
   - job: Deploy
     displayName: Deploy to Production
     steps:
+    - task: HelmDeploy@0
+      inputs:
+        command: 'package'
+        chartPath: 'helm-charts/worker'
+        updateDependency: true
     - task: DownloadBuildArtifacts@1
       inputs:
         buildType: 'current'
