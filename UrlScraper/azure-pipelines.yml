@@ -83,4 +83,4 @@ stages:
         chartPath: 'Chart/worker-0.1.0.tgz'
         releaseName: 'urlscraper'
         overrideValues: 'tag=$(tag)'
-        valueFile: 'Urlscraper/values.yaml'
+        valueFile: 'UrlScraper/values.yaml'
