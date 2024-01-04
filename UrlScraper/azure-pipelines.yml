@@ -29,32 +29,34 @@ stages:
         tags: |
           $(tag)
 - stage: Helm
-  displayName: Package Helm Chart
+  displayName: Package And Publish Helm Chart
   jobs:
-  - job: Package
-    displayName: Package Helm Chart
+  - job: PackageAndPublish
+    displayName: Package Helm Chart and Publish as Artifact
     steps:
     - task: HelmDeploy@0
+      displayName: Package 
       inputs:
         command: 'package'
         chartPath: 'helm-charts/worker'
         updateDependency: true
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/worker-0.1.0.tgz'
+        ArtifactName: 'Chart'
+        publishLocation: 'Container'
 - stage: Prod
   displayName: Deploy to Production
   jobs:
   - job: Deploy
     displayName: Deploy to Production
     steps:
-    - task: HelmDeploy@0
-      inputs:
-        command: 'package'
-        chartPath: 'helm-charts/worker'
-        updateDependency: true
     - task: DownloadBuildArtifacts@1
       inputs:
         buildType: 'current'
-        downloadType: 'specific'
-        itemPattern: 'worker-0.1.0.tgz'
+        downloadType: 'single'
+        artifactName: 'Chart'
+        itemPattern: 
         downloadPath: '$(System.DefaultWorkingDirectory)'
         checkDownloadedFiles: true
     - task: CmdLine@2
