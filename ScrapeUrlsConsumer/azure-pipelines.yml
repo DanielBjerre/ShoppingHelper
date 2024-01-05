@@ -7,7 +7,7 @@ resources:
 
 variables:
   dockerRegistryServiceConnection: 'b0cf3d2f-716a-46f6-ad18-f38a066e9863'
-  imageRepository: 'urlscraper'
+  imageRepository: 'scrapeurlsconsumer'
   containerRegistry: 'shoppinghelper.azurecr.io'
   dockerfilePath: 'Dockerfile'
   tag: '$(Build.BuildId)'
@@ -59,20 +59,6 @@ stages:
         itemPattern: 
         downloadPath: '$(System.DefaultWorkingDirectory)'
         checkDownloadedFiles: true
-    - task: CmdLine@2
-      inputs:
-        script: |
-          echo "Structure of work folder of this pipeline:"
-          tree $(Agent.WorkFolder)/1
-
-          echo "Build.ArtifactStagingDirectory:" 
-          echo "$(Build.ArtifactStagingDirectory)"
-
-          echo "Build.BinariesDirectory:" 
-          echo "$(Build.BinariesDirectory)"
-
-          echo "Build.SourcesDirectory:"
-          echo "$(Build.SourcesDirectory)"
     - task: HelmDeploy@0
       inputs:
         connectionType: 'Kubernetes Service Connection'
@@ -81,6 +67,6 @@ stages:
         command: 'upgrade'
         chartType: 'FilePath'
         chartPath: 'Chart/worker-0.1.0.tgz'
-        releaseName: 'urlscraper'
+        releaseName: 'scrape-urls-consumer'
         overrideValues: 'image.tag=$(tag)'
-        valueFile: 'UrlScraper/values.yaml'
+        valueFile: 'ScrapeUrlsConsumer/values.yaml'
