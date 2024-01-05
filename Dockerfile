@@ -11,17 +11,17 @@ RUN apt-get update \
     clang zlib1g-dev
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["UrlScraper/UrlScraper.csproj", "UrlScraper/"]
-RUN dotnet restore "./UrlScraper/./UrlScraper.csproj"
+COPY ["ScrapeUrlsConsumer/ScrapeUrlsConsumer.csproj", "ScrapeUrlsConsumer/"]
+RUN dotnet restore "./ScrapeUrlsConsumer/./ScrapeUrlsConsumer.csproj"
 COPY . .
-WORKDIR "/src/UrlScraper"
-RUN dotnet build "./UrlScraper.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/ScrapeUrlsConsumer"
+RUN dotnet build "./ScrapeUrlsConsumer.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./UrlScraper.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=true
+RUN dotnet publish "./ScrapeUrlsConsumer.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=true
 
 FROM mcr.microsoft.com/dotnet/runtime-deps:8.0 AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["./UrlScraper"]
+ENTRYPOINT ["./ScrapeUrlsConsumer"]

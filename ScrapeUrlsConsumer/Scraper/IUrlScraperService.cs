@@ -1,5 +1,5 @@
 ﻿namespace ScrapeUrlsConsumer.Scraper;
-internal interface IUrlScraperService
+internal interface IUrlScraper
 {
     public string RecipeSource { get; set; }
     public IEnumerable<Uri> ScrapeUrls { get; set; }
