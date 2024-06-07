@@ -12,3 +12,4 @@ Is it over-engineered for what it is? - Yes, but this is all part of the plan :)
 * .NET Aspire
 * MassTransit
 * CosmosDb
+* Testing out different ways of dependencies in microservices (Nugets vs Project References) and how to organize
