@@ -1,6 +1,8 @@
+using MassTransit;
 using OpenTelemetry.Trace;
+using ScrapeService.Shared.Options;
 using Serilog;
-using UrlScraper;
+using Shared.Extensions.IServiceCollectionExtensions;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -14,7 +16,16 @@ try
         .UseSerilog((ctx, config) => 
             config.WriteTo.Console())
         .ConfigureServices(services => services
-            .AddHostedService<Worker>()
+            .AddMassTransit(x =>
+            {
+                x.AddConsumersFromNamespaceContaining<Program>();
+                x.UsingAzureServiceBus((context, cfg) =>
+                {
+                    cfg.Host("your connection string");
+                    cfg.ConfigureEndpoints(context);
+                });
+            })
+            .RegisterValidatedOptions<SeleniumOptions>(SeleniumOptions.Section)
             .AddOpenTelemetry()
             .WithTracing(builder => builder
                 .AddHttpClientInstrumentation()

@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>8b60a3f6-5ba6-4030-a895-32ef16c16b84</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ShoppingHelper.Recipes.Api\ShoppingHelper.Recipes.Api.csproj" />
+    <ProjectReference Include="..\..\ShoppingHelper.Scraper.Api\ShoppingHelper.Scraper.Api.csproj" />
+    <ProjectReference Include="..\..\ShoppingHelper.Scraper.RecipeScrapedProcessor\ShoppingHelper.Scraper.RecipeScrapedProcessor.csproj" />
+  </ItemGroup>
+
+</Project>
