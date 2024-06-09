@@ -1,4 +1,6 @@
+using Azure.Identity;
 using MediatR;
+using Microsoft.Extensions.Azure;
 using ShoppingHelper.Scraper.Api.Common.Extensions.IServiceCollectionExtensions;
 using ShoppingHelper.Scraper.Api.Common.Options;
 using ShoppingHelper.Scraper.Api.Features.ScrapeRecipes.HelloFreshRecipes;
@@ -12,7 +14,12 @@ builder.Services.AddOptionsWithValidateOnStart<CosmosOptions>()
     .BindConfiguration(CosmosOptions.Section)
     .ValidateDataAnnotations();
 
-builder.Services.RegisterBlobServiceClient(builder.Configuration);
+builder.Services.AddAzureClients(clinetBuilder =>
+{
+    clinetBuilder.UseCredential(new DefaultAzureCredential());
+    clinetBuilder.AddBlobServiceClient(builder.Configuration.GetRequiredSection(BlobStorageOptions.Section));
+});
+
 builder.Services.AddOptionsWithValidateOnStart<BlobStorageOptions>()
     .BindConfiguration(BlobStorageOptions.Section)
     .ValidateDataAnnotations();
