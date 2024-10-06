@@ -1,5 +1,4 @@
-﻿
-using ShoppingHelper.Scraper.Api.Services.HelloFreshAccessTokenService;
+﻿using ShoppingHelper.Scraper.Processor.ScrapeRequested.Services.HelloFreshAccessTokenService;
 using System.Net.Http.Headers;
 
 internal class HelloFreshAuthDelegatingHandler(IHelloFreshAccessTokenService helloFreshAccessTokenService) : DelegatingHandler

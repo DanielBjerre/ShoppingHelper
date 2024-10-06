@@ -8,6 +8,10 @@ public static class RegisterCosmosClientExtension
 {
     public static IServiceCollection RegisterCosmosClient(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddOptionsWithValidateOnStart<CosmosOptions>()
+            .BindConfiguration(CosmosOptions.Section)
+            .ValidateDataAnnotations();
+
         var options = new CosmosClientOptions { AllowBulkExecution = true };
         var client = new CosmosClient(configuration.GetRequiredSection(CosmosOptions.Section)[nameof(CosmosOptions.Endpoint)], new DefaultAzureCredential(), options);
         services.AddSingleton(client);

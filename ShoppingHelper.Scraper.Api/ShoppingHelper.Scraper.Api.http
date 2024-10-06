@@ -1,6 +1,10 @@
 @ShoppingHelper.Scraper.Api_HostAddress = http://localhost:5222
 
-GET {{ShoppingHelper.Scraper.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+GET {{ShoppingHelper.Scraper.Api_HostAddress}}/scrape/request?recipeSource=0
 
 ###
+
+GET {{ShoppingHelper.Scraper.Api_HostAddress}}/recipes?recipeId=6613d4dec415e8779118783a
+
+####
+

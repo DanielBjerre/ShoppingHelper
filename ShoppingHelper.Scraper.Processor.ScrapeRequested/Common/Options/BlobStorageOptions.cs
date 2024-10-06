@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ShoppingHelper.Scraper.Api.Common.Options;
+namespace ShoppingHelper.Scraper.Processor.ScrapeRequested.Common.Options;
 
-public class BlobStorageOptions
+public class HelloFreshBlobStorageOptions
 {
-    public const string Section = "BlobStorage";
+    public const string Section = "HelloFreshBlobStorag";
 
     [Required]
     public required string ServiceUri { get; set; }

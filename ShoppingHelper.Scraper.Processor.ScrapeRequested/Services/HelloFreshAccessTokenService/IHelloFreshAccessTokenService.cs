@@ -1,4 +1,4 @@
-﻿namespace ShoppingHelper.Scraper.Api.Services.HelloFreshAccessTokenService;
+﻿namespace ShoppingHelper.Scraper.Processor.ScrapeRequested.Services.HelloFreshAccessTokenService;
 
 public interface IHelloFreshAccessTokenService
 {

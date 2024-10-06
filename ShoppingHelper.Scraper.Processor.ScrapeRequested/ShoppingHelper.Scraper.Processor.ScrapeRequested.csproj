@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>dotnet-ShoppingHelper.Scraper.Processor.ScrapeRequested-325994b2-76b8-40f6-9151-ec82e89b4597</UserSecretsId>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Azure.Storage.Blobs" Version="12.22.1" />
+		<PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="8.2.5" />
+		<PackageReference Include="Microsoft.Azure.Cosmos" Version="3.43.1" />
+		<PackageReference Include="Microsoft.Extensions.Azure" Version="1.7.6" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ShoppingHelper.Scraper.Contracts\ShoppingHelper.Scraper.Contracts.csproj" />
+		<ProjectReference Include="..\ShoppingHelper\ShoppingHelper.ServiceDefaults\ShoppingHelper.ServiceDefaults.csproj" />
+	</ItemGroup>
+</Project>

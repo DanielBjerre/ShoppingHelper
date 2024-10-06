@@ -10,12 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.0.0" />
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.2.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ShoppingHelper.AsyncMessaging.Api\ShoppingHelper.AsyncMessaging.Api.csproj" />
+    <ProjectReference Include="..\..\ShoppingHelper.Recipes.AddScrapedRecipeProcessor\ShoppingHelper.Recipes.AddScrapedRecipeProcessor.csproj" />
     <ProjectReference Include="..\..\ShoppingHelper.Recipes.Api\ShoppingHelper.Recipes.Api.csproj" />
     <ProjectReference Include="..\..\ShoppingHelper.Scraper.Api\ShoppingHelper.Scraper.Api.csproj" />
+    <ProjectReference Include="..\..\ShoppingHelper.Scraper.Processor.ScrapeRequested\ShoppingHelper.Scraper.Processor.ScrapeRequested.csproj" />
     <ProjectReference Include="..\..\ShoppingHelper.Scraper.RecipeScrapedProcessor\ShoppingHelper.Scraper.RecipeScrapedProcessor.csproj" />
   </ItemGroup>
 

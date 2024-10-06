@@ -1,5 +1,6 @@
 using ShoppingHelper.Scraper.RecipeScrapedProcessor;
 using ShoppingHelper.Scraper.RecipeScrapedProcessor.Common.Extensions.IServiceCollectionExtensions;
+using ShoppingHelper.ServiceDefaults.Extensions.IHostApplicationBuilderExtensions;
 
 var builder = Host.CreateApplicationBuilder(args);
 

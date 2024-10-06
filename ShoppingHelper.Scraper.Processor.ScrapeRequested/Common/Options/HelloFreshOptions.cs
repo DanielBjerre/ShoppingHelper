@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ShoppingHelper.Scraper.Api.Common.Options;
+namespace ShoppingHelper.Scraper.Processor.ScrapeRequested.Common.Options;
 
 public class HelloFreshOptions
 {
